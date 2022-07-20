@@ -36,3 +36,7 @@ class PersonInfo(models.Model):
         verbose_name = '人物信息'
 
 
+    def __str__(self):
+        return self.name
+
+
