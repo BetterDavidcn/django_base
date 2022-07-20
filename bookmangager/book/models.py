@@ -8,18 +8,17 @@ class BookInfo(models.Model):
 
     """
     # 创建字段
-    name = models.CharField(max_length=100)
-
+    name = models.CharField(max_length=100, verbose_name='书名')
     # 以字符串格式显示
     def __str__(self):
         return self.name
 
 class PersonInfo(models.Model):
-    name = models.CharField(max_length=100)
-    gender = models.BooleanField()
+    name = models.CharField(max_length=100, verbose_name='姓名')
+    gender = models.BooleanField(verbose_name='男性')
 
     # 创建外键
-    book = models.ForeignKey(BookInfo, on_delete=models.CASCADE)
+    book = models.ForeignKey(BookInfo, on_delete=models.CASCADE, verbose_name='书名')
 
     # 以字符串格式显示
     def __str__(self):
