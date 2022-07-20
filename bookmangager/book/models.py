@@ -10,6 +10,9 @@ class BookInfo(models.Model):
     # 创建字段
     name = models.CharField(max_length=100)
 
+    # 以字符串格式显示
+    def __str__(self):
+        return self.name
 
 class PersonInfo(models.Model):
     name = models.CharField(max_length=100)
@@ -17,5 +20,9 @@ class PersonInfo(models.Model):
 
     # 创建外键
     book = models.ForeignKey(BookInfo, on_delete=models.CASCADE)
+
+    # 以字符串格式显示
+    def __str__(self):
+        return self.name
 
 
