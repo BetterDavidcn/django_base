@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.db.models  import F, Q
+from django.db.models  import F, Q, Sum, Count, Max, Min, Avg
 
 from book.models import BookInfo, PersonInfo
 
@@ -113,3 +113,29 @@ def index(request):
 # BookInfo.objects.filter(Q(read_count__gt=20)|Q(read_count__lt=20))
 #
 # BookInfo.objects.filter(~Q(read_count__gt=20))
+
+# ###############################聚合函数#######################################
+# # Sum, Max, Avg, Min, Count
+# BookInfo.objects.aggregate(Sum('read_count'))
+#
+# # order_by
+# BookInfo.objects.all().order_by('read_count')
+
+
+# ################################级联查询#############################################
+
+# # 关联查询
+# # 查询书籍编号为1的所有人物信息
+# book = BookInfo.objects.get(id=1)
+# book.personinfo_set.all()
+# 查询人物编号为1的书籍信息
+# person = PersonInfo.objects.get(id=19)
+#
+# # 关联过滤查询
+# BookInfo.objects.filter(personinfo__id='23')
+# BookInfo.objects.filter(personinfo__id__gt='23')
+# BookInfo.objects.filter(personinfo__description__contains='八')
+# BookInfo.objects.filter(personinfo__name='郭靖')
+#
+# PersonInfo.objects.filter(book__name='天龙八部')
+# PersonInfo.objects.filter(book__read_count__gt=30)
