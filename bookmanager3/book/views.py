@@ -3,6 +3,8 @@ import re
 
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
+from django.views.generic import View
+
 from book.models import BookInfo, PeopleInfo
 
 # Create your views here.
@@ -94,3 +96,77 @@ def response(request):
 
     # redirect重定向
     return redirect('https://www.baidu.com')
+
+
+def set_cookie(request):
+    username = request.GET.get('username')
+    password = request.GET.get('password')
+    response = HttpResponse('OK')
+    response.set_cookie('name', username, max_age= 3600)
+    response.set_cookie('password', password)
+
+    return response
+
+
+def get_cookie(request):
+    # print(request.COOKIES)
+    name = request.COOKIES
+    response = HttpResponse('OK')
+    response.delete_cookie('name')
+    return response
+
+
+def set_session(request):
+    user_id = 1
+    user_name = request.GET.get('user_name')
+    request.session['user_id'] = user_id
+    request.session['user_name'] = user_name
+
+    # # clear  和 flush
+    # request.session.clear()
+    # request.session.flush()
+    request.session.set_expiry(3600)
+
+    return HttpResponse('OK')
+
+
+def get_session(request):
+    # user_id = request.session['user_id']
+    # user_name = request.session['user_name']
+    # get默认为None
+    user_id = request.session.get('user_id')
+    user_name = request.session.get('user_name')
+    content = '{}:{}'.format(user_id, user_name)
+    return HttpResponse(content)
+
+
+def login(request):
+    if request.method == 'GET':
+        return HttpResponse('get')
+    else:
+        return HttpResponse('post')
+
+
+class RegisterView(View):
+
+    def get(self, requst):
+
+        return HttpResponse('GET')
+
+    def post(self, request):
+
+        return HttpResponse('Post')
+
+
+class Person:
+
+    def play(self):
+        pass
+
+    @classmethod
+    def say(cls):
+        pass
+
+    @staticmethod
+    def eat():
+        pass

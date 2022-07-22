@@ -1,7 +1,8 @@
 from django.urls import path, converters
 from django.urls import register_converter
 
-from book.views import index, create_book, shop, get, register, post_json, method, response
+from book.views import index, create_book, shop, get, register, post_json, method, response, set_cookie, get_cookie, \
+    set_session, get_session, login, RegisterView
 
 
 # 定义转换器，并注册
@@ -31,4 +32,10 @@ urlpatterns = [
     path('json/', post_json),
     path('method/', method),
     path('response/', response),
+    path('set_cookie/', set_cookie),
+    path('get_cookie/', get_cookie),
+    path('set_session/', set_session),
+    path('get_session/', get_session),
+    path('login/', login),
+    path('new_login/', RegisterView.as_view())
 ]
