@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--
+        1.先导入vue.js，在head中
+        2.定义一个标签
+        3.创建vue实例
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{ message }}
+    [[ message ]]
+    <hr>
+    <a :href="next">[[ info ]]</a>
+    <hr>
+    <a href="#" v-if="is_login">个人中心</a>
+    <hr>
+    <h1 v-if="aaa">Vue is aaa !</h1>
+    <h1 v-else>Oh no 😢</h1>
+    <hr>
+    <div v-if="a === 'A'">
+      A
+    </div>
+    <div v-else-if="a ==='B'">
+      B
+    </div>
+    <div v-else-if="a === 'C'">
+      C
+    </div>
+    <div v-else>
+      Not A/B/C
+    </div>
+    <ul>
+        <li v-for="(ct, index) in city">第[[ index*10 ]]个城市：[[ ct ]]</li>
+    </ul>
+    <ul>
+        <li v-for="(val, n, i) in object">[[i]]: [[n]]: [[ val ]]</li>
+    </ul>
+    <hr>
+    <button v-on:click="counter += 1">Add 1</button>
+    <span>Result: [[counter]]</span>
+    <hr>
+    <button v-on:click="login">登录</button>
+    <hr>
+    <button @click="say_hi('Hello, MEIMEIXIEA !')">Say Hi !</button>
+</div>
+</body>
+<script type="text/javascript">
+    var app = new Vue({
+        el: '#app',
+        delimiters: ['[[',']]'],    // delimters修改分隔符 ['开始的分隔符'，'结束的分隔符']
+        data: {
+            message: 'Hello world!',
+            info: "请登录",
+            next: 'http://www.baidu.com',
+            is_login: true,
+            a: 'A',
+            aaa: true,
+            city: ['Beijing', 'Shanghai', 'Wuhan', 'Shenzhen', 'Guangzhou'],
+            object: {
+                title: 'Vue',
+                author: 'MEIMEIXIEA',
+                pub_date: '2000-1-1',
+            },
+            counter: 1,
+        },
+        methods: {
+            login: function (){
+                alert('Hello, MEIMEIXIEA !')
+            },
+            say_hi: function (message){
+                alert(message + '~')
+            }
+        }
+    })
+</script>
+
+</html>

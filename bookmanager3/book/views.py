@@ -1,6 +1,7 @@
 import json
 import re
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.views.generic import View
@@ -170,3 +171,16 @@ class Person:
     @staticmethod
     def eat():
         pass
+
+
+class OrderView(LoginRequiredMixin, View):
+
+    def get(self, request):
+
+        return HttpResponse('GET我的订单，需要登录')
+
+    def post(self, request):
+
+        return HttpResponse('POST我的订单，需要登录')
+
+

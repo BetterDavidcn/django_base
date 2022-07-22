@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--
+        1.先导入vue.js，在head中
+        2.定义一个标签
+        3.创建vue实例
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{ message }}
+    [[ message ]]
+    <hr>
+    <a :href="next">[[ info ]]</a>
+</div>
+</body>
+<script type="text/javascript">
+    var app = new Vue({
+        el: '#app',
+        delimiters: ['[[',']]'],    // delimters修改分隔符 ['开始的分隔符'，'结束的分隔符']
+        data: {
+            message: "Hello world!",
+            info: "请登录",
+            next: 'http://www.baidu.com',
+        }
+    })
+</script>
+
+</html>
